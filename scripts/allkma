@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DB="/data/shared/metagenomics/mlst/db/pubmlst/all/all-index"
+
+if [[ -e "$1" ]] && [[ ! -z ${2+x} ]];
+then
+  echo "KMA $1 > $2"
+
+  kma -i "$1" -o "$2" -t_db "$DB" -1t1 -bcNano -cge -md 1 -t 16 -sam 4 -ont -status > "$2.sam"
+else
+  echo "USAGE: $(basename $0) INPUT.fq OUTPUT"
+fi
